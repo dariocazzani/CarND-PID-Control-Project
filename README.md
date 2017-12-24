@@ -73,7 +73,7 @@ At this speed, oscillations are heavily present at the beginning when only the P
 
 5. I started increasing the **Derivative** factor until the car stopped oscillating so much that it would go offroad after a few seconds.
 I found several combinations of values that would allow the car to drive properly when the throttle is fixed ad _0.3_
-For example: 0.2, 0.0045, 2.0, or 1.5, 0.0035, 2.9.
+For example: 0.2, 0.0045, 2.0, or 1.5, 0.0035, 2.9, or 0.17, 0.0035, 3.5.
 
 Check the video below for the results
 
@@ -84,12 +84,24 @@ Check the video below for the results
 
 It is common sense to slow down when we need to curve, so I played around with a simple formula that would increase the throttle when the car is driving straight, and decrease the throttle viceversa.
 
-     throttle = (1 - fabs(steer_value)) * 0.3 + 0.15;
+     throttle = (1 - fabs(steer_value)) * 0.25 + 0.25;
 
 The result is visible in the video below.
 The car ends up driving a bit faster and with more oscillations than without the throttle control, but still withing the limits of the road.
 
 ![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+
+## No Speed adjustement
+
+The video below shows the result of the car being controlled by a PID with: 
+* Proportional gain: 0.17
+* Integral gain: 0.0035
+* Derivative gain: 3.5
+
+And with constant throttle 0.3
+
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+
 
 ## Possible improvements.
 
