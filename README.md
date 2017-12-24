@@ -64,7 +64,7 @@ Of course this led the car to quickly drive off road
 2. I then increased a bit the **Proportional** factor up to _0.2_. Interestingly, because the throttle is so small in value, the car is able to drive around the circuit, slowly but properly in the middle of the road as shown in the video below.
 My understanding of the reason why oscillations and offset disappear is because curves cancel out the unavoidable error of the proportional controller.
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/P2uKW0rGuqc/0.jpg)](https://youtu.be/P2uKW0rGuqc)
 
 3. Next step is to set the throttle back to the suggested value _0.3_ and play with the **Integral** factor.
 At this speed, oscillations are heavily present at the beginning when only the Proportional factor is used and the car goes offroad after a few seconds.
@@ -77,8 +77,7 @@ For example: 0.2, 0.0045, 2.0, or 1.5, 0.0035, 2.9, or 0.17, 0.0035, 3.5.
 
 Check the video below for the results
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
-
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lZ1jo3QvKMg/0.jpg)](https://youtu.be/lZ1jo3QvKMg)
 
 ## Adjusting the speed
 
@@ -89,7 +88,7 @@ It is common sense to slow down when we need to curve, so I played around with a
 The result is visible in the video below.
 The car ends up driving a bit faster and with more oscillations than without the throttle control, but still withing the limits of the road.
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/mO4LZDpeN3c/0.jpg)](https://youtu.be/mO4LZDpeN3c)
 
 ## No Speed adjustement
 
@@ -100,7 +99,7 @@ The video below shows the result of the car being controlled by a PID with:
 
 And with constant throttle 0.3
 
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/XpE5XZD3H4w/0.jpg)](https://youtu.be/XpE5XZD3H4w)
 
 
 ## Possible improvements.
