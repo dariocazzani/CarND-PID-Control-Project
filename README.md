@@ -86,7 +86,12 @@ It is common sense to slow down when we need to curve, so I played around with a
 
      throttle = (1 - fabs(steer_value)) * 0.3 + 0.15;
 
-The result is visible in the video below
+The result is visible in the video below.
+The car ends up driving a bit faster and with more oscillations than without the throttle control, but still withing the limits of the road.
 
 ![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
+## Possible improvements.
+
+1. Speed control: Instead of manually writing a formula out of common sense, it would probably be better to explore writing a PID controller for the speed
+2. It can be interesting what hyperparameters an automatic method would end up with. Again, I chose to do it manually in order to get a better insight of the various factors of the PID controller
