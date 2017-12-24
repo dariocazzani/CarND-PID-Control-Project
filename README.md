@@ -48,31 +48,31 @@ The goal of a controller is to regulate processes as part of a control loop. The
 
 A PID controller is a particular type of control loop that adjuststs its output using 3 different aspects of the feedback:
 * **P** stands for _Proportional_: The output of the proportional factor is the product of gain (in our code **Kp**) and measured error ε (in our code **CTE**). The greater the error, the greater the response. Setting the proportional gain too high causes a controller to repeatedly overshoot the setpoint, leading to oscillation.
-The problem witha a proportional only controller is that when the error becomes too small, the output becomes too small, leading to a steady state despite with an error - offset.
+The problem with a proportional only controller is that when the error becomes too small, the output becomes too small, leading to a steady state despite with an error - offset.
 
 * **I** stands for _Integral_: The integral part keeps track of all the error encountered so far and gets added (if the error is positive) or subtracted (if negative). This way we can react properly even when the proportional factor is too small to work properly. If the offset remains steady, the _integral error_ becomes bigger, leading to a stronger response from the controller.
-The downside to the integral factor is that it strongly contributes to controller output overshoot past the target setpoint.
+The downside to the integral factor (in our code the gain is **Ki**) is that it might make the controller to overshoot past the target setpoint.
 
-* **D** stands for _Derivative_: the derivative is looking at the rate of change of the error. The more error changes, the larger the derivative factor becomes. The effect of the derivative is to counteract the overshoot caused by P and I.
+* **D** stands for _Derivative_: the derivative is looking at the rate of change of the error. The more error changes, the larger the derivative factor (in our code the gain is **Kp**) becomes. The effect of the derivative is to counteract the overshoot caused by P and I.
 
 ## Tuning the PID controller hypeparameters - manual
-I decided to tune the hyperparameters manually in order to get a better understanding of the effects of each factor.
+I decided to tune the hyperparameters manually in order to get a better understanding of the effects of each factor / gain.
 
-1. First I set all factors to zero an reduced the throttle to _0.1_.
+1. First I set all gains to zero an reduced the throttle to _0.1_.
 Of course this led the car to quickly drive off road
 
-2. I then increased a bit the **Proportional** factor up to _0.2_. Interestingly, because the throttle is so small in value, the car is able to drive around the circuit, slowly but properly in the middle of the road as shown in the video below.
+2. I then increased a bit the **Proportional** gain up to _0.2_. Interestingly, because the throttle is so small in value, the car is able to drive around the circuit, slowly but properly in the middle of the road as shown in the video below.
 My understanding of the reason why oscillations and offset disappear is because curves cancel out the unavoidable error of the proportional controller.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/P2uKW0rGuqc/0.jpg)](https://youtu.be/P2uKW0rGuqc)
 
-3. Next step is to set the throttle back to the suggested value _0.3_ and play with the **Integral** factor.
+3. Next step is to set the throttle back to the suggested value _0.3_ and play with the **Integral** gain.
 At this speed, oscillations are heavily present at the beginning when only the Proportional factor is used and the car goes offroad after a few seconds.
 
-4. Because the Integral factor doesn't cancel out the oscillations, I increased the value until I saw that the car would behave more or less the same as if it was not included. The idea is that, because oscillations will be taken care of by the derivative factor, the Ingegral factor needs to make sure that we take care of the offset when present
+4. Because the Integral gain doesn't cancel out the oscillations, I increased the value until I saw that the car would behave more or less the same as if it was not included. The idea is that, because oscillations will be taken care of by the derivative factor, the Ingegral factor needs to make sure that we take care of the offset when present.
 
 5. I started increasing the **Derivative** factor until the car stopped oscillating so much that it would go offroad after a few seconds.
-I found several combinations of values that would allow the car to drive properly when the throttle is fixed ad _0.3_
+I found several combinations of gains that would allow the car to drive properly when the throttle is fixed ad _0.3_
 For example: 0.2, 0.0045, 2.0, or 1.5, 0.0035, 2.9, or 0.17, 0.0035, 3.5.
 
 Check the video below for the results
@@ -81,7 +81,7 @@ Check the video below for the results
 
 ## Adjusting the speed
 
-It is common sense to slow down when we need to curve, so I played around with a simple formula that would increase the throttle when the car is driving straight, and decrease the throttle viceversa.
+It is common sense to slow down when we need to curve, so I played around with a simple formula that would increase the throttle when the car is driving straight, and decrease the throttle otherwise.
 
      throttle = (1 - fabs(steer_value)) * 0.25 + 0.25;
 
@@ -104,5 +104,5 @@ And with constant throttle 0.3
 
 ## Possible improvements.
 
-1. Speed control: Instead of manually writing a formula out of common sense, it would probably be better to explore writing a PID controller for the speed
-2. It can be interesting what hyperparameters an automatic method would end up with. Again, I chose to do it manually in order to get a better insight of the various factors of the PID controller
+1. Speed control: Instead of manually writing a formula based on common sense, it would probably be better to explore writing a PID controller for the speed.
+2. It can be interesting what hyperparameters an automatic method for param-tuning would end up with. Again, I chose to do it manually in order to get a better insight of what role plays each gain in the PID controller.
