@@ -42,6 +42,9 @@ Tips for setting up your environment can be found [here](https://classroom.udaci
 The purpose of this project is to understand what a PID controller is and to let
 such a controller drive a car in the simulator.
 
-## What is a PID controller
+## PID controller and hyperparams tuning.
 
-blah
+The goal of a controller is to regulate processes as part of a control loop. The controller receives a setpoint request (in our experiment the desired position of the car in the road) and compares it to a measured feedback. The setpoint is where we want the car to be, and the feedback can be thought of as where the car really is.
+
+A PID controller is a particular type of control loop that adjuststs its output using 3 different aspects of the feedback:
+* **P** stands for Proportional: The output of the proportional factor is the product of gain (in our code **Kp**) and measured error ε (in our code **CTE**). The greater the error, the greater the response. Setting the proportional gain too high causes a controller to repeatedly overshoot the setpoint, leading to oscillation.
